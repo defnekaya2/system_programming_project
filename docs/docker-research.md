@@ -10,3 +10,4 @@
 - PostgreSQL official image
 - Veritabanı başlatma komutları
 - Volume ile veri persist etme
+Week 1 Docker notes

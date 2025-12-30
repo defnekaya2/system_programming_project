@@ -1,4 +1,3 @@
-# Temel imaj
 FROM ubuntu:22.04
 
 # Güncelleme ve bağımlılıklar

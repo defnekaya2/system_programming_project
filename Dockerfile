@@ -1,3 +1,4 @@
+
 # Temel imaj
 FROM ubuntu:22.04
 

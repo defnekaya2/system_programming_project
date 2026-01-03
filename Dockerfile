@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     cmake \
     libpqxx-dev \
+    pkg-config\
     postgresql-client \
     make \
     && rm -rf /var/lib/apt/lists/*

@@ -16,7 +16,7 @@ confirming that changes are enforced via Pull Requests.
 
 - main: stable release branch (protected)
 - develop: active development branch
-- studentX-weekY-topic: feature branches
+- studentX-weekY-topic: feature branches for each week and each branch deleted after their work is done.
 
 All changes must be merged via Pull Request.
 Direct pushes to main branch are not allowed.

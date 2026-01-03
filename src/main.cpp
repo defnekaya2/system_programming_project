@@ -1,18 +1,25 @@
+#include "database/database.hpp"
+#include "services/student_service.hpp"
 #include <iostream>
-#include <unistd.h>
-#include "database.hpp"
 
 int main() {
-    std::cout << "Student Information System started" << std::endl;
-
     Database db;
     db.connect();
 
-    while (true) {
-        sleep(5);
+    StudentService service(db);
+
+    service.addStudent("Defne Kaya", "2023123", "CSE");
+
+    auto students = service.listStudents();
+    for (const auto& s : students) {
+        std::cout << s.id << " "
+                  << s.name << " "
+                  << s.student_number << " "
+                  << s.department << "\n";
     }
 
     return 0;
 }
+
 
 

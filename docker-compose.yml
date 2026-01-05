@@ -1,0 +1,40 @@
+
+services:
+  db:
+    image: postgres:16
+    container_name: sis_postgres
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - sis_network
+
+  app:
+    build: .
+    container_name: sis_app
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: student_information
+      DB_USER: zuleyha
+      DB_PASSWORD: zuleyha1
+    ports:
+      - "8080:8080"
+    networks:
+      - sis_network
+
+volumes:
+  postgres_data:
+
+networks:
+  sis_network:
+    driver: bridge
+
+
+   

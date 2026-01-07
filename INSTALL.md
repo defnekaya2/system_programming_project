@@ -8,3 +8,20 @@ Prerequisites:
 - Docker
 - Docker Compose
 - C++ compiler
+
+## Week 4-Finalization
+First, clone the project repository:
+git clone https://github.com/defnekaya2/system_programming_project.git
+cd system_programming_project
+
+Make sure Docker is running on your system. Then pull the required Docker images and start the containers using Docker Compose:
+docker compose pull
+docker compose up -d
+
+After starting the system, verify that the containers are running:
+docker ps
+
+The application container and the PostgreSQL database container should be listed as running.
+
+To stop and remove the containers, use:
+docker compose down

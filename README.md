@@ -43,3 +43,8 @@ Direct pushes to main branch are not allowed.
 - CI/CD pipeline executes without critical errors.
 - Final Docker images are published on Docker Hub.
 - Project is ready for final submission and presentation.
+
+Project Structure:
+- src/: Application source code
+- include/: Header files
+- docker/: Docker-related files

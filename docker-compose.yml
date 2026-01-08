@@ -1,4 +1,5 @@
-
+# Final docker-compose configuration validated for Week 4 submission
+# Services, volumes, networks and healthchecks verified
 services:
   db:
     image: postgres:16

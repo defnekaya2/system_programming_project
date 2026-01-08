@@ -1,25 +1,20 @@
-#Student Information System
-## Development Workflow
-- All changes are made in feature branches
-- Direct push to main and develop is disabled
-- All changes are merged via Pull Requests
-- Also after push operations unnecessary branches are deleted
+## Docker Setup (Final)
 
-### Branch Protection Verification
+The project is fully containerized using Docker Compose.
 
--A direct push attempt to the main branch was intentionally performed
-to verify branch protection rules.
--GitHub explicitly logged the violation and allowed an admin bypass,
-confirming that changes are enforced via Pull Requests.
+### Running the System
 
-## Branch Strategy
+```bash
+docker compose up -d
+This command starts:
+- PostgreSQL database container
+- Student Information System application container
 
-- main: stable release branch (protected)
-- develop: active development branch
-- studentX-weekY-topic: feature branches for each week and each branch deleted after their work is done.
+### Notes
 
-All changes must be merged via Pull Request.
-Direct pushes to main branch are not allowed.
+- Containers communicate over a private Docker network
+- Database data is persisted using Docker volumes
+- PostgreSQL health checks are enabled to ensure service readiness
 
 ## Contribution Rules
 
@@ -36,15 +31,12 @@ Direct pushes to main branch are not allowed.
 - Meaningful title and description
 - Must reference a related Issue
 - Direct push is not allowed
-## Final Status
 
-- All system components have been integrated and tested.
-- Docker containers run successfully using docker-compose.
-- CI/CD pipeline executes without critical errors.
-- Final Docker images are published on Docker Hub.
-- Project is ready for final submission and presentation.
+## Docker Images
 
-Project Structure:
-- src/: Application source code
-- include/: Header files
-- docker/: Docker-related files
+- Application Image: https://hub.docker.com/r/zuleyha34/sis-project-app
+=======
+> **Validation:**  
+> The Docker Compose configuration has been validated for the final submission.  
+> All services start and restart cleanly without errors.
+

@@ -1,5 +1,11 @@
+
 # Final docker-compose configuration validated for Week 4 submission
 # Services, volumes, networks and healthchecks verified
+
+# Container health and restart stability verified (Week 4)
+# Services restart cleanly and remain healthy
+
+
 services:
   db:
     image: postgres:16
@@ -13,13 +19,19 @@ services:
       - "5432:5432"
     networks:
       - sis_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} "]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app:
-    build: .
+    image: system_programming_project-app:latest
     container_name: sis_app
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DB_HOST: db
       DB_NAME: student_information
@@ -36,6 +48,4 @@ volumes:
 networks:
   sis_network:
     driver: bridge
-
-
    

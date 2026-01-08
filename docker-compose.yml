@@ -1,6 +1,8 @@
 
+
 # Container health and restart stability verified (Week 4)
 # Services restart cleanly and remain healthy
+
 
 services:
   db:
@@ -15,6 +17,15 @@ services:
       - "5432:5432"
     networks:
       - sis_network
+
+
+  app:
+    build: .
+    container_name: sis_app
+    restart: always
+    depends_on:
+      - db
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} "]
       interval: 10s
@@ -28,6 +39,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
     environment:
       DB_HOST: db
       DB_NAME: student_information
@@ -44,4 +56,5 @@ volumes:
 networks:
   sis_network:
     driver: bridge
+
    

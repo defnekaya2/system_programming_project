@@ -12,25 +12,12 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY CMakeLists.txt .
-COPY src ./src
-COPY include ./include
+COPY ./src /app/src
+COPY ./include /app/include
+COPY CMakeLists.txt /app
 
-RUN cmake -S . -B build && \
-    cmake --build build
-
-# -------- RUNTIME STAGE --------
-FROM ubuntu:22.04
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && apt-get install -y \
-    libpqxx-6.4 \
-    && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-
-COPY --from=builder /app/build/sis_app .
+RUN cmake .
+RUN make
 
 CMD ["./sis_app"]
 

@@ -1,28 +1,23 @@
-# Temel imaj
-FROM ubuntu:22.04
+# -------- BUILD STAGE --------
+FROM ubuntu:22.04 AS builder
 
-# Güncelleme ve bağımlılıklar
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
-    g++ \
+    build-essential \
     cmake \
+    pkg-config \
     libpqxx-dev \
-    pkg-config\
-    postgresql-client \
-    make \
     && rm -rf /var/lib/apt/lists/*
 
-# Çalışma dizini
 WORKDIR /app
 
-# Source kodu kopyala
 COPY ./src /app/src
 COPY ./include /app/include
 COPY CMakeLists.txt /app
 
-# Build
 RUN cmake .
 RUN make
 
-# Komut satırı ile çalıştır
 CMD ["./sis_app"]
 

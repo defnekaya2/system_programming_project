@@ -26,7 +26,16 @@ Prerequisites:
 - Docker
 - Docker Compose
 - C++ compiler
+---
 
+## Docker Installation (Final Verification)
+
+The application can be deployed using Docker Compose without additional configuration.
+
+### Steps
+
+```bash
+docker compose up -d
 
 
 

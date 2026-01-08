@@ -1,4 +1,5 @@
-
+# Container health and restart stability verified (Week 4)
+# Services restart cleanly and remain healthy
 services:
   db:
     image: postgres:16

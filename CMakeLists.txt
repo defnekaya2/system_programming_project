@@ -23,10 +23,3 @@ target_link_libraries(sis_app
     pqxx
     ${PQXX_LIBRARIES}
 )
-
-
-
-
-
-
-

@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 struct Student {
     int id;
@@ -7,3 +8,4 @@ struct Student {
     std::string department;
     std::string email;
 };
+

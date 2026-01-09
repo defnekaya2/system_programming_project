@@ -7,19 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(PQXX REQUIRED libpqxx)
 
+include_directories(include ${PQXX_INCLUDE_DIRS})
+
 add_executable(sis_app
     src/main.cpp
-    src/config.cpp
-    src/database/database.cpp
     src/services/student_service.cpp
 )
 
-target_include_directories(sis_app PRIVATE
-    include
-    ${PQXX_INCLUDE_DIRS}
-)
-
-target_link_libraries(sis_app PRIVATE
-    ${PQXX_LIBRARIES}
-)
+target_link_libraries(sis_app ${PQXX_LIBRARIES})
 

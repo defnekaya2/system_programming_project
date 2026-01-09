@@ -5,6 +5,7 @@
 int main() {
     Database db;
     if (!db.connect("db", "student_information", "zuleyha", "zuleyha1")) {
+        std::cerr << "Database connection failed\n";
         return 1;
     }
 
@@ -13,7 +14,12 @@ int main() {
 
     do {
         std::cout << "\n--- Student Information System ---\n";
-        std::cout << "1. Add student\n2. List students\n3. Update student\n4. D>
+        std::cout << "1. Add student\n";
+        std::cout << "2. List students\n";
+        std::cout << "3. Update student\n";
+        std::cout << "4. Delete student\n";
+        std::cout << "5. Exit\n";
+        std::cout << "Enter your choice: ";
         std::cin >> choice;
 
         switch (choice) {
@@ -28,5 +34,4 @@ int main() {
 
     return 0;
 }
-
 

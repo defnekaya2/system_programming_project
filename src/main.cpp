@@ -13,7 +13,7 @@ int main() {
 
     do {
         std::cout << "\n--- Student Information System ---\n";
-        std::cout << "1. Add student\n2. List students\n3. Update student\n4. Delete student\n5. Exit\nChoice: ";
+        std::cout << "1. Add student\n2. List students\n3. Update student\n4. D>
         std::cin >> choice;
 
         switch (choice) {
@@ -28,4 +28,5 @@ int main() {
 
     return 0;
 }
+
 

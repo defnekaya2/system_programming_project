@@ -1,33 +1,41 @@
-
 services:
   db:
     image: postgres:16
     container_name: sis_postgres
     restart: always
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: zuleyha
+      POSTGRES_PASSWORD: zuleyha1
+      POSTGRES_DB: student_information
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - sis_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zuleyha -d student_information"]
+      interval: 5s
+      retries: 5
+      timeout: 5s
 
   app:
     build: .
     container_name: sis_app
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DB_HOST: db
       DB_NAME: student_information
       DB_USER: zuleyha
       DB_PASSWORD: zuleyha1
-    ports:
-      - "8080:8080"
     networks:
       - sis_network
+    stdin_open: true
+    tty: true
+    command: ./sis_app
 
 volumes:
   postgres_data:
@@ -36,5 +44,3 @@ networks:
   sis_network:
     driver: bridge
 
-
-   

@@ -1,34 +1,38 @@
-#include "student_service.hpp"
-#include <pqxx/pqxx>
+#include "services/student_service.hpp"
+#include <iostream>
 
-StudentService::StudentService(Database& db) : database(db) {}
+void StudentService::addStudent() {
+    Student s;
+    std::cout << "ID: "; std::cin >> s.id;
+    std::cin.ignore();
+    std::cout << "Name: "; std::getline(std::cin, s.name);
+    std::cout << "Surname: "; std::getline(std::cin, s.surname);
+    std::cout << "Department: "; std::getline(std::cin, s.department);
+    std::cout << "Email: "; std::getline(std::cin, s.email);
 
-void StudentService::addStudent(const std::string& name,
-                                const std::string& number,
-                                const std::string& department) {
-
-    pqxx::work txn(database.getConnection());
-    txn.exec(
-        "INSERT INTO students (name, student_number, department) VALUES (" +
-        txn.quote(name) + ", " +
-        txn.quote(number) + ", " +
-        txn.quote(department) + ")"
-    );
-    txn.commit();
+    database.insertStudent(s);
 }
 
-std::vector<Student> StudentService::listStudents() {
-    pqxx::work txn(database.getConnection());
-    pqxx::result res = txn.exec("SELECT * FROM students");
-
-    std::vector<Student> students;
-    for (const auto& row : res) {
-        Student s;
-        s.id = row["id"].as<int>();
-        s.name = row["name"].as<std::string>();
-        s.student_number = row["student_number"].as<std::string>();
-        s.department = row["department"].as<std::string>();
-        students.push_back(s);
+void StudentService::listStudents() {
+    auto students = database.getStudents();
+    for (auto& s : students) {
+        std::cout << s.id << " | " << s.name << " | " << s.surname
+                  << " | " << s.department << " | " << s.email << "\n";
     }
-    return students;
 }
+
+void StudentService::updateStudent() {
+    int id;
+    std::string email;
+    std::cout << "Student ID to update: "; std::cin >> id;
+    std::cin.ignore();
+    std::cout << "New email: "; std::getline(std::cin, email);
+    database.updateStudent(id, email);
+}
+
+void StudentService::deleteStudent() {
+    int id;
+    std::cout << "Student ID to delete: "; std::cin >> id;
+    database.deleteStudent(id);
+}
+
